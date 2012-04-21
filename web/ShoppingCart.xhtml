@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head></h:head>
+    <h:body>
+        <f:view>
+            <h:outputStylesheet library="css" name="cdi.css"/>
+            <h:form>
+                <h:outputText value="Logged in: " /> <h:outputText value="#{cartController.getUser().getName()}"/>
+                - <h:commandLink action="#{cartController.logout}" value="Ausloggen"/>
+                <hr/>
+                <h2><h:outputText value="Einkaufskorb"/></h2>
+                <h:dataTable value="#{cartController.shoppingCartPets}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Name"/>
+                        </f:facet>
+                        <h:outputText value="#{item.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Art"/>
+                        </f:facet>
+                        <h:outputText value="#{item.species.name}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{cartController.removeFromCart}" value="Entfernen"/>
+                    </h:column>
+                </h:dataTable>
+                <hr/>
+                <h:commandLink action="#{cartController.showPetList}" value="zurück"/>
+            </h:form>
+        </f:view>
+    </h:body>
+
+</html>
+
